@@ -10,7 +10,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long clientId;
-    private Long productId;
 
     public Long getId() {
         return id;
@@ -28,11 +27,4 @@ public class Order {
         this.clientId = clientId;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
 }

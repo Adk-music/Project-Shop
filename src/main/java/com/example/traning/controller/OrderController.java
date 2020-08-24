@@ -1,9 +1,8 @@
 package com.example.traning.controller;
 
-import com.example.traning.dto.OrderDto;
+
 import com.example.traning.entity.Order;
 import com.example.traning.repository.OrderRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -42,22 +41,20 @@ public class OrderController {
     }
 
     @PostMapping("order")
-    public Order addOrder(@RequestBody OrderDto orderDto){
+    public Order addOrder(@RequestBody Long clientId){
 
         Order order = new Order();
-        order.setClientId(orderDto.getClientId());
-        order.setProductId(orderDto.getProductId());
+        order.setClientId(clientId);
 
         return orderRepository.save(order);
     }
 
     @PutMapping("order/id/{id}")
-    public Order putOrder (@PathVariable Long id, @RequestBody OrderDto orderDto){
+    public Order putOrder (@PathVariable Long id, @RequestBody Long clientId){
         Optional<Order> orderOptional = orderRepository.findById(id);
         if(orderOptional.isPresent()){
             Order order = orderOptional.get();
-            order.setClientId(orderDto.getClientId());
-            order.setProductId(orderDto.getProductId());
+            order.setClientId(clientId);
             return orderRepository.save(order);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Order not found!");
